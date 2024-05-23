@@ -8,3 +8,4 @@ extra/
 fileUpload/
 mymodules/
 UrlShortner/.env
+ExpenseTracker/.env
