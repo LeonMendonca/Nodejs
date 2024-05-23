@@ -1,0 +1,20 @@
+<%- include ('header') -%>
+  <h1>Login</h1>
+  <form action='/auth/login' method='POST'>
+    <label for="uname">Username</label>
+    <input type = "text" name="username" id ="uname" class="form-control" required />
+
+    <label for="pass">Password</label>
+    <input type = "text" name="password" id ="pass" class="form-control" required />
+
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+  </form>
+  <% if(login === null) { %>
+      <b>User not found</b>
+  <% } else if(login === false){ %>
+    <b>Invalid details</b>
+  <% } else {%>
+    <b></b>
+  <% } %>
+
+<%- include ('footer') -%>

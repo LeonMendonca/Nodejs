@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include ('./bootstrap/link-bootstrap') -%>
+  <%- include ('./bootstrap/script-bootstrap') -%>
+  <link href="/css/hide-arrows.css" rel="stylesheet"></link>
+</head>
+  <body>
+
+      <div class="container mt-5">
+      <% if(locals.warning) { %>
+        <div class="alert alert-warning" role="alert">
+          <%= locals.warning %>
+        </div>
+      <% } %>
+
+      <form class="row g-3" method="POST">
+        <div class="col-12">
+          <label for="exp" class="form-label">New expense</label>
+          <input type="text" class="form-control" id="exp" name="expenseName" placeholder="(required)" value="<%= locals.formData.Name || '' %>" >
+        </div>
+        <div class="col-md-4">
+          <label for="amt" class="form-label">Amount</label>
+          <input type="number" class="form-control" id="amt" name="amount" placeholder="(required)" value="<%= locals.formData.Amount || '' %>">
+        </div>
+        <div class="col-md-4">
+          <label for="date" class"form-label">Date</label>
+            <input type="date" class="form-control mt-2" id="date" name="date" value="<%= locals.formData.Date %>">
+        </div>
+        <div class="col-md-4">
+          <label for="cat" class="form-label">Category</label>
+          <select id="cat" class="form-select" name="category">
+            <option selected></option>
+            <%- include ('./options') -%>
+          </select>
+        </div>
+        <label for="desc" class="form-label">Description (Optional)</label>
+        <div class="form-floating mt-0">
+          <textarea class="form-control" id="desc" style="height: 100px" name="description"><%= locals.formData.Description || ''%></textarea>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
+    <div>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<%- include ('header') -%>
+  <h1>Sign up</h1>
+  <form action='/auth/signup' method='POST'>
+    <label for="uname">Username</label>
+    <input type = "text" name="username" id ="uname" class="form-control" required />
+
+    <label for="disname">Display Name</label>
+    <input type = "text" name="displayName" id ="disname" class="form-control" placeholder="(Optional)" />
+
+    <label for="pass">Password</label>
+    <input type = "password" name="password" id ="pass" class="form-control" required />
+
+    <button type="submit" class="btn btn-primary btn-block">SignUp</button>
+    <br>
+    <% if(signup) { %>
+      <b>Sign up successfully! </b><a href='/login'>Login!</a>
+    <% } else if(signup === false){ %>
+      <b>Username already taken</b>
+    <% } else {%>
+      <b></b>
+    <% } %>
+  </form>
+<%- include ('footer') -%>

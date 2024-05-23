@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+  <%- include ('./bootstrap/link-bootstrap') -%>
+  <%- include ('./bootstrap/script-bootstrap') -%>
+  <%- include ('./components/nav') -%>
+</head>
+<body>
+  <div class="container d-flex justify-content-center">
+    <div class="card" style="width: 28rem;"> <!-- Adjust the width as needed -->
+      <img src="<%= currentUser.profileImage %>" class="img-thumbnail" alt="no image"> 
+      <div class="card-body">
+        <h5 class="card-title"><%= currentUser.name %></h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Email :</strong> <%= currentUser.email %></li>
+        <li class="list-group-item"><strong>Role :</strong> <%= currentUser.role %></li>
+      </ul>
+      <div class="card-body">
+        <a href="/profile/edit" class="card-link">Edit</a>
+        <a href="/profile/delete" class="card-link">Delete account</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  

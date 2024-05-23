@@ -1,0 +1,24 @@
+<%- include ('header') -%>
+
+<h2> Write a new entry </h2>
+
+<!-- 
+action attr can be omitted when the form is submitted to the current URL 
+In this case, current URL is /new-entry and post req is made to that URL
+-->
+<form method="post" role="form">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" name="title" placeholder="Entry title" >
+  </div>
+
+  <div class="form-group">
+    <label for="content">Entry text </label>
+    <textarea class="form-control" id="content" name="content" 
+    placeholder="Love Express! It’s a great tool for building websites." rows="3" >
+    </textarea>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Post entry" class="btn btn-primary">
+  </div>
+<%- include ('footer') -%>

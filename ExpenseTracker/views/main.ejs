@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include ('./bootstrap/link-bootstrap') -%>
+  <%- include ('./bootstrap/script-bootstrap') -%>
+  <link href="/css/hide-arrows.css" rel="stylesheet"></link>
+</head>
+  <body>
+  <div class="container text-center">
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-4">
+        <p class="mb-1"><b>Remaining</b></p>
+        <p class="display-4"><span><%= amount.currency %><%= amount.remainAmount %></span></p>
+      </div>
+      <div class="col-md-4">
+        <p class="mb-1"><b>Todays amount</b></p>
+        <p class="display-4"><span><%= amount.currency %><%= amount.inputAmount %></span></p>
+      </div>
+      <div class="col-md-4">
+        <p class="mb-1"><b>Spent</b></p>
+        <p class="display-4"><span><%= spentPercent %>%</span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <a href='/newentry' class="btn btn-primary"><b>+ </b>Add Expense</a>
+      </div>
+    </div>
+
+    <br><br>
+
+    <div class="container text-center">
+      <div class="row row-cols-1">
+        <% if(locals.expenses.length) { %>
+          <% expenses.forEach(function(expense, index){ %>
+            <div class="col">
+              <div class="card mb-3">
+                <div class="card-body d-flex justify-content-between align-items-center">
+
+                  <div class="d-flex flex-column align-items-start">
+                    <a href="/edit/<%= expense._id %>" class="mb-4">
+                      <img src="e.png" width="18" alt="edit" />
+                    </a>
+                    <a href="/delete/<%= expense._id %>">
+                      <img src="d.png" width="18" alt="delete" />
+                    </a>
+                  </div>
+
+                  <div class="text-center flex-grow-1">
+                    <p class="card-text"><strong>Expense Name</strong> <a href="/expense/<%= expense._id %>"><%= expense.expenseName %></a></p>
+                    <p class="card-text"><strong>Category</strong> <%= expense.category %></p>
+                    <p class="card-text"><strong>Description</strong> <%= expense.description %></p>
+                  </div>
+
+                  <div class="d-flex align-items-center">
+                    <div class="d-flex flex-column me-4">
+                      <span><strong>Cost</strong></span>
+                      <span><%= amount.currency %><%= expense.amount %></span>
+                    </div>
+                    <div class="d-flex flex-column">
+                      <span><strong>Remaining</strong></span>
+                      <span><%= amount.currency %><%= remainAmount[index] %></span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <div class="col">
+            <div class="alert alert-info" role="alert">
+              <strong>No expenses yet</strong>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include ('./bootstrap/link-bootstrap') -%>
+  <%- include ('./bootstrap/script-bootstrap') -%>
+  <%- include ('./components/nav') -%>
+</head>
+<body>
+  <div class="container d-flex justify-content-center">
+    <div class="card" style="width: 28rem;"> <!-- Adjust the width as needed -->
+      <form method="POST" enctype="multipart/form-data">
+        <img src="<%= currentUser.profileImage %>" class="img-thumbnail" alt="no image"> 
+        <div class="card-body">
+          <label for="image" class="form-label">New profile image</label>
+          <input type="file" class="form-control" id="image" name="newProfileImage"  />
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <label for="ename"><strong>Edit Name</strong></label>
+            <input type="text" class="form-control" id="ename" name="newName" value="<%=currentUser.name%>" required />
+          </li>
+          <li class="list-group-item">
+            <label for="eemail"><strong>Email</strong></label> 
+            <input type="text" class="form-control" id="eemail" name="newEmail" value="<%=currentUser.email%>" required />
+          </li>
+        </ul>
+        <div class="card-body">
+        <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include ('./bootstrap/link-bootstrap') -%>
+  <%- include ('./bootstrap/script-bootstrap') -%>
+</head>
+<body>
+  <div class="container">
+    <form method="POST" action="/edit/<%= locals.redirect %>">
+      <div class="mb-3">
+        <h3><label for="editurl" class="form-label">Edit URL</label></h3>
+        <input type="text" class="form-control" id="editurl" name="editurl" value="<%= locals.editUrl %>">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Update</button>
+    </form>
+  </div>
+</body>
+</html>

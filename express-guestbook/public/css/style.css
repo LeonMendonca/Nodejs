@@ -1,0 +1,12 @@
+body {
+  margin:20px;
+}
+
+#no-entries {
+  font-size: 31px;
+  text-align: left;
+}
+
+textarea {
+  resize:none;
+}

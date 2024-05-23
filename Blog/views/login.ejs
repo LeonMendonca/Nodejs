@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include ('./bootstrap/link-bootstrap') -%>
+  <%- include ('./bootstrap/script-bootstrap') -%>
+  <%- include ('./components/nav') -%>
+  <%- include ('./bootstrap/passwordVis') -%>
+</head>
+<body>
+  <div class="container mt-5">
+    <!--Alert box-->
+    <% if(loginStat === null) { %>
+      <div class="alert alert-danger" role="alert">
+        <p class="mb-0">User not found</p> 
+      </div>
+    <% } else if (loginStat === false) { %>
+      <div class="alert alert-danger" role="alert">
+        <span class="mb-0">Invalid Password</span>
+      </div>
+    <% } %>
+
+    <h1 class="mb-3">Login</h1>
+    <form method="POST" action="/auth/login">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" required />
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      </div>
+      <div class="mb-3">
+        <label for="pass" class="form-label">Password</label>
+        <div class="input-group">
+          <input type="password" class="form-control" id="password" name="password" required />
+          <button type="button" class="btn btn-outline-secondary" id="togglePassword">Show</button>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+
+</body>
+</html>

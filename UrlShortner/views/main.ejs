@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include ('./bootstrap/link-bootstrap') -%>
+  <%- include ('./bootstrap/script-bootstrap') -%>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="text-center mb-4">Url Shortener</h2>
+
+            <form method="POST">
+              <div class="form-group text-center"> <label for="url">Enter valid url</label>
+                <input type="text" class="form-control" id="url" name="url" required>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary btn-block w-100">Submit</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+
+  <div class="container text-center">
+    <div class="row row-cols-1">
+      <% if(locals.urls.length) { %>
+        <% urls.forEach(function(url){ %>
+          <div class="col">
+            <div class="card mb-3">
+              <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                  <a href="/edit/<%= url.shortId %>"><img src="edit.png" width=18 alt="edit" /></a>
+                </div>
+                <div class="text-center">
+                  <p class="card-text"><strong>Short ID:</strong> <a href="<%= url.shortId %>" target="_blank"><%=url.shortId%></a></p>
+                  <p class="card-text"><strong>Original URL:</strong> <%= url.orgUrl %></p>
+                </div>
+                <div>
+                  <a href="/delete/<%= url.shortId %>"><img src="delete.png" width=18 alt="delete" /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="col">
+          <div class="alert alert-info" role="alert">
+            <strong>No URLs yet</strong>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+ </body>
+</html>
+
