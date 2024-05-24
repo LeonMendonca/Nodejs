@@ -85,9 +85,15 @@ function buildHandlerRoute(app) {
   // Edit an expense
   handler.post('/edit/:id',async function(req,res) {
     const edituserEntry = req.body
+    const objData = {
+      Name:edituserEntry.expenseName,
+      Amount:edituserEntry.amount,
+      Description:edituserEntry.description,
+      Date:edituserEntry.date
+    }
     let boolValinput = ValidateInput(edituserEntry)
     if(!boolValinput) {
-      return res.redirect(`/edit/${req.params.id}`)
+      return res.render('new-entry',{formData:objData, warning:result})
     }
     const { spentOrsaved, currAmt } = await CheckAmount(edituserEntry.amount,req.params.id)
     
@@ -98,7 +104,7 @@ function buildHandlerRoute(app) {
       let boolValamount = ValidateAmount(Math.abs(spentOrsaved))
       // if balance is less than spent, redirect to same page
       if(!boolValamount) {
-        return res.redirect(`/edit/${req.params.id}`)
+        return res.render('new-entry',{formData:objData, warning:result})
       }
     }
     console.log("new cost",edituserEntry.amount,"spent/saved",spentOrsaved,"prev cost",currAmt)
