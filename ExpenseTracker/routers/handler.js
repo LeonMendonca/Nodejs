@@ -110,7 +110,7 @@ function buildHandlerRoute(app) {
       }
     }
     console.log("new cost",edituserEntry.amount,"spent/saved",spentOrsaved,"prev cost",currAmt)
-    const array = await ChangeAmount(spentOrsaved, amountObj.remainAmount, edituserEntry.amount, req.params.id, amountObj._id)
+    const array = await ChangeAmount(spentOrsaved, amountObj.remainAmount, edituserEntry, req.params.id, amountObj._id)
     console.log(array)
     result = undefined
     res.redirect('/')

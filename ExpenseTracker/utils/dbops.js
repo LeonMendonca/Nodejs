@@ -46,15 +46,21 @@ async function CheckAmount(changeAmt, objId) {
   }
 }
 
-async function ChangeAmount(spentOrsaved,remainAmount,changeAmt, expId, amountId) {
+async function ChangeAmount(spentOrsaved, remainAmount, editFormdata, expId, amountId) {
   try {
-    const changeAmtint = parseInt(changeAmt)
+    const changeAmtint = parseInt(editFormdata.amount)
     //console.log("value",spentOrsaved,remainAmount,changeAmtint, expId, amountId)
     //console.log("final remain amount",remainAmount+spentOrsaved)
     const finalRemainAmount = remainAmount+spentOrsaved
-    const expenseObj = await expenseModel.findOneAndUpdate({_id:expId},{amount:changeAmtint})
+    const expenseObj = await expenseModel.findOneAndUpdate({_id:expId},{ $set:{ 
+      amount:changeAmtint, 
+      expenseName:editFormdata.expenseName,
+      date:editFormdata.date,
+      category:editFormdata.category,
+      description:editFormdata.description
+    }})
     const amountObj = await amountModel.findOneAndUpdate({_id:amountId},{remainAmount:finalRemainAmount})
-    return [ expenseObj, amountObj ]
+    //return [ expenseObj, amountObj ]
   } catch (error) {
     return error.message
   }
