@@ -65,7 +65,8 @@ function buildHandlerRoute(app) {
       Name:userEntry.expenseName,
       Amount:userEntry.amount,
       Description:userEntry.description,
-      Date:userEntry.date
+      Date:userEntry.date,
+      Category:userEntry.category
     }
     
     let boolValinput = ValidateInput(userEntry)
@@ -89,7 +90,8 @@ function buildHandlerRoute(app) {
       Name:edituserEntry.expenseName,
       Amount:edituserEntry.amount,
       Description:edituserEntry.description,
-      Date:edituserEntry.date
+      Date:edituserEntry.date,
+      Category:edituserEntry.category
     }
     let boolValinput = ValidateInput(edituserEntry)
     if(!boolValinput) {
@@ -126,6 +128,13 @@ function buildHandlerRoute(app) {
     }
     
   })
+
+  handler.get('/cancel',function(req,res) {
+    result = undefined
+    app.locals.formData = {}
+    res.redirect('/')
+  })
+
   return handler
 }
 export { buildHandlerRoute, result }

@@ -1,8 +1,9 @@
-<option>Food and Dining</option>
-<option>Transportation</option>
-<option>Housing</option>
-<option>Utilities</option>
-<option>Insurance</option>
-<option>Entertainment</option>
-<option>Travel</option>
-<option>Shopping</option>
+<option <%= (locals.formData.Category === 'Food and Dining') ? 'selected' : ''  %>>Food and Dining</option>
+          
+<option <%= (locals.formData.Category === 'Transportation') ? 'selected' : ''  %>>Transportation</option>
+<option <%= (locals.formData.Category === 'Housing') ? 'selected' : ''  %>>Housing</option>
+<option <%= (locals.formData.Category === 'Utilities') ? 'selected' : ''  %>>Utilities</option>
+<option <%= (locals.formData.Category === 'Insurance') ? 'selected' : ''  %>>Insurance</option>
+<option <%= (locals.formData.Category === 'Entertainment') ? 'selected' : ''  %>>Entertainment</option>
+<option <%= (locals.formData.Category === 'Travel') ? 'selected' : ''  %>>Travel</option>
+<option <%= (locals.formData.Category === 'Shopping') ? 'selected' : ''  %>>Shopping</option>

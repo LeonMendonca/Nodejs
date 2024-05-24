@@ -46,8 +46,8 @@
                     </a>
                   </div>
 
-                  <div class="text-center flex-grow-1">
-                    <p class="card-text"><strong>Expense Name</strong> <a href="/expense/<%= expense._id %>"><%= expense.expenseName %></a></p>
+                  <div class="text-center flex-grow-2">
+                    <p class="card-text"><strong>Expense Name</strong> <%= expense.expenseName %></a></p>
                     <p class="card-text"><strong>Category</strong> <%= expense.category %></p>
                     <p class="card-text"><strong>Description</strong> <%= expense.description %></p>
                   </div>
@@ -76,6 +76,4 @@
         <% } %>
       </div>
     </div>
-
-
 </html>

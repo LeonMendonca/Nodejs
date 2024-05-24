@@ -50,7 +50,8 @@ function buildEjsRoute(app) {
       Name:expObj.expenseName,
       Amount:expObj.amount,
       Description:expObj.description,
-      Date:dateDb
+      Date:dateDb,
+      Category:expObj.category
     }
     res.render('new-entry', { formData:objData, warning:result })
   })

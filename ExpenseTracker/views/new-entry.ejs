@@ -25,12 +25,12 @@
         </div>
         <div class="col-md-4">
           <label for="date" class"form-label">Date</label>
-            <input type="date" class="form-control mt-2" id="date" name="date" value="<%= locals.formData.Date %>">
+          <input type="date" class="form-control mt-2" id="date" name="date" value="<%= locals.formData.Date %>">
         </div>
         <div class="col-md-4">
           <label for="cat" class="form-label">Category</label>
           <select id="cat" class="form-select" name="category">
-            <option selected></option>
+            <option></option>
             <%- include ('./options') -%>
           </select>
         </div>
@@ -40,6 +40,7 @@
         </div>
         <div class="col-12">
           <button type="submit" class="btn btn-primary">Add</button>
+          <a href='/cancel' class="btn btn-primary">Cancel</a>
         </div>
       </form>
     <div>
