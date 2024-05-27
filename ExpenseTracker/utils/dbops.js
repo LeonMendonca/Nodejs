@@ -1,9 +1,9 @@
-import amountModel from '../db/models/today_curr.js'
+import amountModel from '../db/models/amount.js'
 import expenseModel from '../db/models/expense_entry.js'
-
+import statsModel from '../db/models/stats.js'
 
 async function CreateAmt(amtObj) {
-  console.log(amtObj)
+  //console.log(amtObj)
   try {
     const createdAmtObj = await amountModel.create(amtObj)
     return createdAmtObj
@@ -13,7 +13,7 @@ async function CreateAmt(amtObj) {
 }
 
 async function CreateExpense(expObj) {
-  console.log(expObj) 
+  //console.log(expObj) 
   try {
     const createdExpObj = await expenseModel.create(expObj)
     return createdExpObj
@@ -23,7 +23,7 @@ async function CreateExpense(expObj) {
 }
 
 async function GetExpenseById(expId) {
-  console.log(expId)
+  //console.log(expId)
   try {
     const expense = await expenseModel.findById(expId)
     return expense
@@ -33,7 +33,7 @@ async function GetExpenseById(expId) {
 }
 
 async function CheckAmount(changeAmt, objId) {
-  console.log(changeAmt,objId)
+  //console.log(changeAmt,objId)
   try {
     let currAmtObj = await expenseModel.findById(objId)
     if(!currAmtObj) {
@@ -80,4 +80,15 @@ async function DeleteExpenseAndUpdateAmount(expId, todayAmtId, remainAmount ) {
     throw error
   }
 }
-export { CreateAmt, CreateExpense, GetExpenseById, CheckAmount, ChangeAmount, DeleteExpenseAndUpdateAmount }
+
+async function CreateStat(amountObj) {
+    //remove spent in percentage
+  let percent = 100-(amountObj.remainAmount/(amountObj.inputAmount/100))
+  const finalPercent = Math.round(percent * 100) / 100;
+  await statsModel.create({ amount:amountObj.inputAmount, spent:finalPercent })
+  await amountModel.findOneAndDelete({_id:amountObj._id})
+  await expenseModel.deleteMany()
+  //console.log(amountObj.inputAmount, finalPercent)
+}
+
+export { CreateAmt, CreateExpense, GetExpenseById, CheckAmount, ChangeAmount, DeleteExpenseAndUpdateAmount, CreateStat }

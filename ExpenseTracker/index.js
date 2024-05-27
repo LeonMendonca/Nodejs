@@ -7,6 +7,8 @@ import path from 'path'
 import { buildEjsRoute } from './routers/ejsroute.js'
 import { buildHandlerRoute } from './routers/handler.js'
 
+import { amountObj } from './routers/ejsroute.js'
+
 import Connect from './db/conn.js'
 
 
@@ -25,6 +27,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.static(path.resolve('./public')))
 
 //my m/w
+
 app.use('/',buildEjsRoute(app))
 app.use('/',buildHandlerRoute(app))
 

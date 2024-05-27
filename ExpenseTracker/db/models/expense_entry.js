@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose'
 
 import { amountObj } from '../../routers/ejsroute.js'
-import amountModel from './today_curr.js'
+import amountModel from './amount.js'
 
 const expEntrySchema = new Schema({
   expenseName : { type:String, required:true, trim:true },

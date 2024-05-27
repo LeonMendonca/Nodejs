@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { CreateAmt, CreateExpense, CheckAmount, ChangeAmount, DeleteExpenseAndUpdateAmount } from '../utils/dbops.js'
+import { CreateAmt, CreateExpense, CheckAmount, ChangeAmount, DeleteExpenseAndUpdateAmount, CreateStat } from '../utils/dbops.js'
 import { amountObj } from './ejsroute.js'
 
 const handler = Router()
@@ -40,7 +40,13 @@ function ValidateSign(num) {
 }
 
 function buildHandlerRoute(app) {
-  //handler to Todays Amount
+  //redirect to home if amount is undefined
+  handler.use(function(req,res) {
+    if(!amountObj) {
+      res.redirect('/')
+    }
+  })
+  //handler the Amount
   handler.post('/',async function(req,res) {
     let userIn = req.body
     if(userIn.inputAmount < 500) {
@@ -109,7 +115,7 @@ function buildHandlerRoute(app) {
         return res.render('new-entry',{formData:objData, warning:result})
       }
     }
-    console.log("new cost",edituserEntry.amount,"spent/saved",spentOrsaved,"prev cost",currAmt)
+    //console.log("new cost",edituserEntry.amount,"spent/saved",spentOrsaved,"prev cost",currAmt)
     const array = await ChangeAmount(spentOrsaved, amountObj.remainAmount, edituserEntry, req.params.id, amountObj._id)
     console.log(array)
     result = undefined
@@ -132,6 +138,14 @@ function buildHandlerRoute(app) {
   handler.get('/cancel',function(req,res) {
     result = undefined
     app.locals.formData = {}
+    res.redirect('/')
+  })
+
+  handler.get('/save',async function(req,res) {
+    if(!amountObj) {
+      return res.redirect('/')
+    }
+    await CreateStat(amountObj)
     res.redirect('/')
   })
 

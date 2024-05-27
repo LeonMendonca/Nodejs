@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose'
 
-
 const amountSchema = new Schema({
   inputAmount : { type:Number },
   remainAmount : { type:Number },

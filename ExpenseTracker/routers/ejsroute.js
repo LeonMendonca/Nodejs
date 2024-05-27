@@ -1,8 +1,9 @@
 import { Router } from 'express'
 
 import { result } from './handler.js'
-import amountModel from '../db/models/today_curr.js'
+import amountModel from '../db/models/amount.js'
 import expenseModel from '../db/models/expense_entry.js'
+import statsModel from '../db/models/stats.js'
 
 import { GetExpenseById } from '../utils/dbops.js'
 
@@ -56,7 +57,13 @@ function buildEjsRoute(app) {
     res.render('new-entry', { formData:objData, warning:result })
   })
 
-
+  ejsRoute.get('/stats',async function(req,res) {
+    const allStats = await statsModel.find()
+    if(!allStats) {
+      return res.render('stats', {stats:[]})
+    }
+    res.render('stats',{stats:allStats})
+  })
 
   return ejsRoute
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include ('./bootstrap/link-bootstrap') -%>
+  <%- include ('./bootstrap/script-bootstrap') -%>
+  <link href="/css/hide-arrows.css" rel="stylesheet"></link>
+</head>
+<body>
+  <div class="container mt-4">
+    <% if(locals.stats.length) { %>
+      <div class="row">
+        <% stats.forEach(function(stat) { %>
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Amount: <%= stat.amount %></h5>
+                <p class="card-text">Spent: <%= stat.spent %>%</p>
+                <p class="card-text"><small class="text-muted">Date: <%= stat.createdAt.toISOString().split('T')[0] %></small></p>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="alert alert-info text-center" role="alert">
+            <strong>No stats yet</strong>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>
+
