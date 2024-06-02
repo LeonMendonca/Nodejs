@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include ('./bootstrap/link-bootstrap') -%>
+  <%- include ('./bootstrap/script-bootstrap') -%>
+</head>
+<body>
+  <div class="container">
+  <% if (locals.modified) { %>
+    <div class="alert alert-warning" role="alert">
+      You have made changes, click here to <a href='/save'>Save</a> <a href='/discard'>Discard</a> 
+    </div>
+  <% } %>
+  
+
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="text-center mb-4">Task Manager</h2>
+
+            <form method="POST">
+              <div class="form-group text-center"> <label for="task">Task</label>
+                <input type="text" class="form-control" id="task" name="task">
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary btn-block w-100">Add</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+
+
+  
+  <div class="container text-center">
+    <div class="row row-cols-1">
+      <% if(locals.tasks.length) { %>
+        <% tasks.forEach(function(task){ %>
+          <div class="col">
+            <div class="card mb-3">
+              <div class="card-body d-flex justify-content-between align-items-center">
+
+                <div class="d-flex flex-column align-items-start">
+                  <a href="/mark/<%= task._id %>" class="mb-4 text-dark text-decoration-none">
+                    <b>mark as</b>
+                    <% if (task.isDone) { %>
+                      <img src="cross.png" width="20" alt="edit" />
+                    <% } else { %>
+                      <img src="check.png" width="20" alt="edit" />
+                    <% } %>
+                  </a>
+                  <a href="/delete/<%= task._id %>">
+                    <img src="d.png" width="18" alt="delete" />
+                  </a>
+                </div>
+
+                <div class="text-center flex-grow-2">
+                  <% if(task.isDone) { %>
+                    <p class="card-text"><strike><%=task.task%></strike></p>
+                  <% } else { %>
+                    <p class="card-text"><strong><%=task.task%></strong></p>
+                  <% } %>
+                </div>
+
+                <div class="d-flex align-items-center">
+                  <div class="d-flex flex-column me-4">
+                    <% if(task.isDone) { %>
+                      <span><strong>Done</strong></span>
+                    <% } else { %>
+                      <span><strong>Not done</strong></span>
+                    <% } %>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="col">
+          <div class="alert alert-info" role="alert">
+            <strong>No Task added yet</strong>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+ </body>
+</html>
+

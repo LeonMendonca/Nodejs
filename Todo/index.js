@@ -1,8 +1,11 @@
 import express from 'express'
+import { resolve } from 'path'
+
+import { ejsRoute } from './routes/ejsroute.js'
+import { reqHandler } from './routes/reqHandler.js'
 
 import { MongoDbConnect } from './db/mongodb.js'
 import { RedisDbConnect } from './db/redis.js'
-import { resolve } from 'path'
 
 const redis = await RedisDbConnect()
 
@@ -14,9 +17,8 @@ app.set('view engine','ejs')
 app.use(express.urlencoded({extended:false}))
 app.use(express.static('./public'))
 
-app.get('/',function(req,res) {
-  res.send(`hello from ${req.ip}`)
-})
+app.use('/',ejsRoute)
+app.use('/',reqHandler)
 
 async function Start() {
   try {
