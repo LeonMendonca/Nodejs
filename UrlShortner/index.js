@@ -4,7 +4,6 @@ import path from 'path'
 import Connect from './db/conn.js' 
 import route from './routes/url.js'
 
-Connect()
 
 const app = express()
 
@@ -23,6 +22,15 @@ app.use(function(_,res) {
   res.status(404).end('404')
 })
 
-app.listen(3000,()=> {
-  console.log("listening to port 3000")
-})
+async function Start() {
+  try {
+    await Connect()
+    app.listen(3000,()=> {
+      console.log("connected to mongoDb\nlistening to port 3000")
+    })
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+Start()
+
