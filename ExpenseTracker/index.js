@@ -39,8 +39,8 @@ app.use(function(_,res) {
 async function Start() {
   try {
     await Connect()
-    app.listen(3000,()=> {
-      console.log("listening to port 3000")
+    app.listen(3001,()=> {
+      console.log("listening to port 3001")
       console.log("connected to DB")
     })
   } catch (error) {

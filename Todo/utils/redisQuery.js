@@ -8,7 +8,7 @@ async function CreateRedisTask(task) {
     const jsonAppend = await redis.call('json.arrappend','alltasks','.',JSON.stringify(task))
     console.log("try from create redis",jsonAppend)
   } catch (error) {
-    const jsonset = await redis.call('json.set','alltasks','.',`[${JSON.stringify(task)}]`)
+    const jsonset = await redis.call('json.set','alltasks','.',JSON.stringify([task]))
     console.log("catch from create redis",jsonset)
   }
 }
