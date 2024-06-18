@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title> Voting system </title>
+    <link id="link"></link>
+    <link rel="stylesheet" href="css/signup-css.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="mdbootstrap/scriptLoad.js"></script>
+    <script src="mdbootstrap/passwordToggle.js"></script>
+    <script src="fetch/signup.js"></script>
+  </head>
+  <body>
+    <section class="h-100 h-custom gradient-custom-2">
+      <!--<form method="POST">-->
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12">
+            <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+              <div class="card-body p-0">
+                <div class="row g-0">
+                  <div class="col-lg-6">
+                    <div class="p-5">
+                      <h2 class="mb-5">Register</h2>
+                      <h3 class="fw-normal mb-5" style="color: #4835d4;">General Infomation</h3>
+
+                      <div class="row">
+                        <div class="col-md-6 mb-4 pb-2">
+                          <div data-mdb-input-init class="form-outline">
+                            <input type="text" id="firstname" class="form-control form-control-lg" name="firstname" />
+                            <label class="form-label" for="firstname">First name</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4 pb-2">
+                          <div data-mdb-input-init class="form-outline">
+                            <input type="text" id="lastname" class="form-control form-control-lg" name="lastname"/>
+                            <label class="form-label" for="lastname">Last name</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class=row>
+                        <div class="col-md-5 mb-4 pb-2">
+                          <select class="select form-control-lg" id="gender" name="gender">
+                            <option value="0" selected disabled>Gender</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Others</option>
+                          </select>
+                        </div>
+                        <div class="col-md-7 pb-2">
+                          <div data-mdb-input-init class="form-outline">
+                            <input type="date" id="date" class="form-control form-control-lg" name="date"/>
+                            <label class="form-label" for="date">Data of Birth</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="mb-4 pb-2">
+                        <div data-mdb-input-init class="form-outline">
+                          <input type="text" id="username" class="form-control form-control-lg" name="username"/>
+                          <label class="form-label" for="username">Username</label>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6 mb-4 pb-2">
+                          <div class="input-group">
+                              <input type="password" id="password" class="form-control" placeholder="Password" 
+                                aria-label="Password" aria-describedby="password-toggle" name="password"/>
+                              <button class="btn btn-outline-primary eyeBtn" type="button" id="password-toggle">
+                                  <i class="far fa-eye" id="toggle-icon-pass"></i>
+                              </button>
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4 pb-2">
+                          <div class="input-group">
+                              <input type="password" id="confirmpassword" class="form-control" placeholder="Confirm Password" 
+                                aria-label="Password" aria-describedby="password-toggle" name="confirmpassword"/>
+                              <button class="btn btn-outline-primary eyeBtn" type="button" id="conf-password-toggle">
+                                  <i class="far fa-eye" id="toggle-icon-conf"></i>
+                              </button>
+                          </div>
+                        </div> 
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 bg-indigo text-white">
+                    <div class="p-5">
+                      <h3 class="fw-normal mb-5">Contact Details</h3>
+
+                      <div class="mb-4 pb-2">
+                        <div data-mdb-input-init class="form-outline form-white"> 
+                          <input type="text" id="currentaddress" class="form-control form-control-lg" name="currentaddress"/>
+                          <label class="form-label" for="currentaddress">Current Address</label>
+                        </div>
+                      </div>
+
+                      <div class="mb-4 pb-2">
+                        <div data-mdb-input-init class="form-outline form-white">
+                          <input type="text" id="permanentaddress" class="form-control form-control-lg" name="permanentaddress"/>
+                          <label class="form-label" for="permanentaddress">Permanent Address</label>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-5 mb-4 pb-2">
+
+                          <div data-mdb-input-init class="form-outline form-white">
+                            <input type="text" id="zipcode" class="form-control form-control-lg" name="zipcode"/>
+                            <label class="form-label" for="zipcode">Zip Code</label>
+                          </div>
+
+                        </div>
+                        <div class="col-md-7 mb-4 pb-2">
+
+                          <div data-mdb-input-init class="form-outline form-white">
+                            <input type="text" id="state" class="form-control form-control-lg" name="state"/>
+                            <label class="form-label" for="state">State</label>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6 mb-4 pb-2">
+                          <div data-mdb-input-init class="form-outline form-white">
+                            <input type="text" id="taluka" class="form-control form-control-lg" name="taluka"/>
+                            <label class="form-label" for="taluka">Taluka</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4 pb-2">
+                          <div data-mdb-input-init class="form-outline form-white">
+                            <input type="text" id="district" class="form-control form-control-lg" name="district"/>
+                            <label class="form-label" for="district">District</label>
+                          </div>
+                        </div>
+                      </div>
+                      
+
+                      <div class="row">
+                        <div class="col-md-5 mb-4 pb-2">
+
+                          <div data-mdb-input-init class="form-outline form-white">
+                            <input type="text" id="aadharnumber" class="form-control form-control-lg" name="aadharnumber"/>
+                            <label class="form-label" for="aadharnumber">Aadhar Number</label>
+                          </div>
+
+                        </div>
+                        <div class="col-md-7 mb-4 pb-2">
+
+                          <div data-mdb-input-init class="form-outline form-white">
+                            <input type="text" id="phonenumber" class="form-control form-control-lg" name="phonenumber"/>
+                            <label class="form-label" for="phonenumber">(+91) Phone Number</label>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div class="mb-4">
+                        <div data-mdb-input-init class="form-outline form-white">
+                          <input type="text" id="email" class="form-control form-control-lg" name="email"/>
+                          <label class="form-label" for="email">Your Email</label>
+                        </div>
+                      </div>
+
+                      <div class="form-check d-flex justify-content-start mb-4 pb-3">
+                        <input class="form-check-input me-3" type="checkbox" id="tnc" name="tnc"/>
+                        <label class="form-check-label text-white" for="tnc">
+                          I do accept the <a href="/terms-and-condition" class="text-white"><u>Terms and Conditions</u></a> of your
+                          site.
+                        </label>
+                      </div>
+
+                      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.umd.min.js"></script>
+
+                      <input type="submit" id="regBtn" data-mdb-button-init data-mdb-ripple-init 
+                      class="btn btn-light btn-lg data-mdb-ripple-color="dark"" value="Register"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--</form>-->
+    </section>
+  </body>
+</html>

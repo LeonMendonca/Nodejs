@@ -23,6 +23,8 @@
     "http": "^0.0.1-security",
     "ioredis": "^5.4.1",
     "jsonwebtoken": "^9.0.2",
+    "mdb-ui-kit": "^7.3.1",
+    "mdbootstrap": "^4.20.0",
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.2",
     "mongosh": "^2.2.5",
