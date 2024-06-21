@@ -4,15 +4,8 @@ const reqHandler = Router();
 
 reqHandler.post('/signup',function(req,res) {
   const regDetail = req.body;
-  let newReg;
-  newReg = Object.assign({},newReg,regDetail);
-  for (let property in regDetail) {
-    if(regDetail[property].trim() != "") {
-      newReg[property] = true;
-    } else {
-      newReg[property] = false;
-    }
-  }
+  /*
+  
   if(!regDetail?.tnc) {
     newReg.tnc = false
   }
@@ -20,7 +13,8 @@ reqHandler.post('/signup',function(req,res) {
     newReg.gender = false
   }
   console.log(regDetail);
-  res.json(newReg);
+  */
+  res.json(regDetail);
 })
 
 export { reqHandler }

@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded',function() {
   document.getElementById('password-toggle').addEventListener('click',function() {
-    Toggle('password','toggle-icon-pass');
+    Toggle('pwd','toggle-icon-pass');
   });
 
   document.getElementById('conf-password-toggle').addEventListener('click',function() {
-    Toggle('conf-password','toggle-icon-conf');
+    Toggle('conf-pwd','toggle-icon-conf');
   });
 });
 
