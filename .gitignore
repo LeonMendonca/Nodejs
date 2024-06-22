@@ -11,3 +11,4 @@ mymodules/
 UrlShortner/.env
 ExpenseTracker/.env
 Todo/.env
+test/

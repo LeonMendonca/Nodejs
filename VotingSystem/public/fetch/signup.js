@@ -15,11 +15,13 @@ function createFormObject() {
     } else {
       value = document.getElementById(id).value;
     }
-    formObject[name] = value
+    formObject[name] = value.toString().trim();
   }
   return formObject;
 }
 
+/*
+unused
 function checkInput(object) {
   let newReg;
   newReg = Object.assign({},newReg,object);
@@ -29,50 +31,100 @@ function checkInput(object) {
       continue;
     }
     //convert to string, cuz of trim()
-    if(object[property].toString().trim() != "") {
-      newReg[property] = true;
-    } else {
-      newReg[property] = false;
-    }
   }
   return newReg;
 }
+*/
 
-function markAsImp(objectWithBool) {
-  for (let propWithBool in objectWithBool) {
-    //console.log(propWithBool,objectWithBool[propWithBool],document.getElementById(propWithBool));
-    if(objectWithBool[propWithBool]) {
-      document.getElementById(propWithBool).classList.remove('color-red');
+function markAsImp(objectWithVal) {
+  let boolean = false;
+  for (let propWithVal in objectWithVal) {
+    if(propWithVal === 'tnc') {
+      if(objectWithVal[propWithVal] === 'true') {
+        document.getElementById(propWithVal).classList.remove('color-red');
+      } else {
+        boolean = true;
+        document.getElementById(propWithVal).classList.add('color-red');
+      }
+    } else if(propWithVal === 'password') {
+      const password = objectWithVal[propWithVal];
+      const length = password.length;
+      //allows alphabets, numbers and special characters
+      const regex = /^[a-zA-Z0-9!@#$%^&*(),.?":'{}|<>]*$/;
+      if(length < 8 || length > 20 || !regex.test(password)) {
+        boolean = true;
+        document.getElementById(propWithVal).classList.add('color-red');
+      } else {
+        document.getElementById(propWithVal).classList.remove('color-red');
+      }
+    } else if (propWithVal === 'zipcode' || propWithVal === 'phonenumber' || propWithVal === 'aadharnumber') {
+      const IntVal = parseInt(objectWithVal[propWithVal]);
+      if(!isNaN(IntVal)) {
+        document.getElementById(propWithVal).classList.remove('color-red');
+      } else {
+        boolean = true;
+        document.getElementById(propWithVal).classList.add('color-red');
+      }
     } else {
-      document.getElementById(propWithBool).classList.add('color-red');
-    }
+      if(objectWithVal[propWithVal] != "") {
+        document.getElementById(propWithVal).classList.remove('color-red');
+      } else {
+        boolean = true;
+        document.getElementById(propWithVal).classList.add('color-red');
+      }
+    } 
   }
+  return boolean;
+}
 
-  /*
-  if (inputField.value.trim() === "") {
-    console.log("add red border");
-    inputField.classList.add('bg-color');
-  } else {
-    console.log("remove red border");
-    inputField.classList.remove('bg-color');
+function validatePassword(password, confirmpassword) {
+  if(password === confirmpassword) {
+    document.getElementById('notmatch').innerHTML = "";
+    return true;
   }
-  */
+  document.getElementById('notmatch').innerHTML = "Password does not match";
+  return false;
+}
+
+function validateEmail(email) {
+  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return regex.test(email);
 }
 
 document.addEventListener('DOMContentLoaded',function() {
-  document.getElementById("regBtn").addEventListener('click',async function() {
+  document.getElementById("regBtn").addEventListener('click',async function(event) {
+    event.preventDefault();
+
     let formObject = createFormObject(); 
-    let formResult = checkInput(formObject);
-    //console.log(formResult);
-    markAsImp(formResult);
-    /*
+    const isImp = markAsImp(formObject);
+    //avoid below if Fields are empty
+    if(isImp) { return }
+    //console.log(formObject);
+    //validate more...
+    const isValid = validatePassword(formObject.password,formObject.confirmpassword);
+    const isValidEmail = validateEmail(formObject.email);
+    if(!isValid || !isValidEmail) { return }
+    console.log('req server');
     const result = await fetch(`${serverUrl}/signup`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(formObject)
     })
-    let res = await result.text();
-    console.log(res);
-    */
+    const response = JSON.parse(await result.text());
+
+    if(!response.uniqueName) {
+      document.getElementById('usernametaken').innerHTML = "This username has been taken"
+    } else {
+      document.getElementById('usernametaken').innerHTML = ""
+    }
+    if(!response.uniqueEmail) {
+      document.getElementById('emailtaken').innerHTML = "This email has been taken"
+    } else {
+      document.getElementById('emailtaken').innerHTML = ""
+    }
+
+    if(response.uniqueName && response.uniqueEmail) {
+      window.location.href = `${serverUrl}/login`;
+    }
   });
 });
