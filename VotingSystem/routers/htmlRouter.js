@@ -3,7 +3,7 @@ import { resolve,join } from 'path';
 
 const html = Router();
 
-const absPath = resolve('./public')
+const absPath = resolve('./dist')
 
 html.get('/login',function(req,res){
   res.sendFile( join(absPath,'login.html') );

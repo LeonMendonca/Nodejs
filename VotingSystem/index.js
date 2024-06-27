@@ -3,7 +3,7 @@ import { resolve } from 'path';
 
 import { html } from './routers/htmlRouter.js';
 import { reqHandler } from './routers/reqHandler.js';
-import { SqlConnect } from './db/sqlConn.js';
+import { SqlConnect } from './models/db/sqlConn.js';
 
 const sql = SqlConnect();
 let pool;
@@ -13,6 +13,8 @@ const port = process.env.PORT;
 
 
 app.use(express.static(resolve('./public')));
+app.use(express.static(resolve('./dist')));
+
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
