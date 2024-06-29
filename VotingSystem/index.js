@@ -26,7 +26,7 @@ app.use(function(req,res) {
 })
 
 try {
-  pool = await sql
+  pool = await sql;
   app.listen(port,()=> {
     console.log(`listening to port ${port}`);
   })

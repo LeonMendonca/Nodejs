@@ -12,6 +12,7 @@
   "type": "module",
   "description": "",
   "dependencies": {
+    "@hapi/joi-date": "^2.0.1",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
@@ -23,6 +24,7 @@
     "express": "^4.19.2",
     "http": "^0.0.1-security",
     "ioredis": "^5.4.1",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "mdb-ui-kit": "^7.3.1",
     "mdbootstrap": "^4.20.0",

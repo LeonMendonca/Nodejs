@@ -1,12 +1,12 @@
 import { Service } from '../models/service.js'
 
 class Controllers {
-  static async CreateUser() {
+  static async CreateUser(req,res) {
     try {
-      console.log("user created");
-      await Service.serviceCreateUser();
+      await Service.serviceCreateUser(req.body);
+      res.json({status:'user created'});
     } catch(error) {
-      console.log(error.message) 
+      res.json({error:error.message});
     }
   }
 }

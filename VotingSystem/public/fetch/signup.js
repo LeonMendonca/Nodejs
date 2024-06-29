@@ -25,24 +25,29 @@ document.addEventListener('DOMContentLoaded',function() {
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(formObject)
     })
-    console.log(response);
     const response = JSON.parse(await result.text());
+    //if no error Object then, redirect to login
+    if(!response?.error) {
+      window.location.href = `${serverUrl}/login`;
+    } 
+    //if error then, this..
+    let error = null;
+    if(response?.error) {
+      error = JSON.parse(response?.error);
+      console.log("ses",error?.username, error?.email);
+    }
+    console.log("main",response?.error);
 
-    /*
-    if(!response.uniqueName) {
+    if(error?.username === false) {
       document.getElementById('usernametaken').innerHTML = "This username has been taken"
     } else {
       document.getElementById('usernametaken').innerHTML = ""
     }
-    if(!response.uniqueEmail) {
+    if(error?.email === false) {
       document.getElementById('emailtaken').innerHTML = "This email has been taken"
     } else {
       document.getElementById('emailtaken').innerHTML = ""
     }
 
-    if(response.uniqueName && response.uniqueEmail) {
-      window.location.href = `${serverUrl}/login`;
-    }
-    */
   });
 });
