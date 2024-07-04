@@ -1,4 +1,4 @@
-class DtoRequest {
+class DtoRequestSignup {
   constructor({
     aadharnumber, confirmpassword, currentaddress, date, district, 
     email, firstname, lastname, gender, password, permanentaddress, 
@@ -24,4 +24,13 @@ class DtoRequest {
   }
 }
 
-export { DtoRequest };
+class DtoRequestLogin {
+  constructor({uniquename, aadharnumber, password, rememberpass}) {
+    this.uniquename = uniquename,
+    this.aadharnumber = aadharnumber,
+    this.password = password,
+    this.rememberpass = rememberpass
+  }
+}
+
+export { DtoRequestSignup, DtoRequestLogin  };

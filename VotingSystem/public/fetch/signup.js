@@ -9,17 +9,14 @@ document.addEventListener('DOMContentLoaded',function() {
   document.getElementById("regBtn").addEventListener('click',async function(event) {
     event.preventDefault();
 
-    let formObject = createFormObject(); 
-    const isImp = markAsImp(formObject);
+    let formObject = createFormObject(); const isImp = markAsImp(formObject);
     //avoid below if Fields are empty
     if(isImp) { return }
 
     //check Confirm Password
     const isValid = validatePassword(formObject.password,formObject.confirmpassword);
     if(!isValid) { return }
-    console.log(formObject);
 
-    console.log('req server');
     const result = await fetch(`${serverUrl}/signup`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -34,9 +31,7 @@ document.addEventListener('DOMContentLoaded',function() {
     let error = null;
     if(response?.error) {
       error = JSON.parse(response?.error);
-      console.log("ses",error?.username, error?.email);
     }
-    console.log("main",response?.error);
 
     if(error?.username === false) {
       document.getElementById('usernametaken').innerHTML = "This username has been taken"

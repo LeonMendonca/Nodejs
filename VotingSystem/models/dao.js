@@ -18,6 +18,23 @@ class Dao {
       throw error;
     }
   }
+
+  static async authUser(uniqueNameCol,uniqueName) {
+    try { 
+      const result = await pool.execute(`SELECT id, username, email, password, aadharnumber FROM regvoters WHERE ${uniqueNameCol} = ?;`,[uniqueName])
+      return result[0];
+    } catch(error) {
+      throw error;
+    }
+  }
+
+  static async getUser(id) {
+    try {
+      const result = await pool.execute(`SELECT * FROM regvoters WHERE id = ?`,[id]);
+      return result[0];
+    } catch(error) {
+    }
+  }
 }
 
 export { Dao };

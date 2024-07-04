@@ -1,5 +1,6 @@
 import express from 'express';
 import { resolve } from 'path';
+import cookieParser from 'cookie-parser';
 
 import { html } from './routers/htmlRouter.js';
 import { reqHandler } from './routers/reqHandler.js';
@@ -17,6 +18,7 @@ app.use(express.static(resolve('./dist')));
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/',html);
 app.use('/',reqHandler);

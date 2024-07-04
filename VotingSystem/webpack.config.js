@@ -2,10 +2,13 @@ import htmlWebpackPlugin from 'html-webpack-plugin'
 import { resolve } from 'path';
 
 export default {
-  //path from webpack to target file
-  entry: './VotingSystem/public/fetch/signup.js',
+  //path from webpack, to target file
+  entry: {
+    signup:'./VotingSystem/public/fetch/signup.js',
+    login:'./VotingSystem/public/fetch/login.js'
+  },
   output: {
-    filename: 'signup.bundle.js',
+    filename: '[name].bundle.js',
     path: resolve('./VotingSystem/dist')
   }, 
   module: {

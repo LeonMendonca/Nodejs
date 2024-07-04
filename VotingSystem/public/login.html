@@ -3,46 +3,68 @@
   <head>
     <title> Voting system </title>
     <link id="link"></link>
-    <script src="mdbootstrap/scriptLoad.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="mdbootstrap/scriptLoad.js"></script>
+    <script src="mdbootstrap/passwordToggle.js"></script>
+    <script src="login.bundle.js"></script>
   </head>
   <body>
-  <section class="vh-100" style="background-color: black;">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card shadow-2-strong" style="border-radius: 1rem;">
-            <div class="card-body p-5 text-center">
+    <section class="vh-100" style="background-color: black;">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+              <div class="card-body p-5 text-center">
 
-              <h3 class="mb-5">Sign in</h3>
+                <h3 class="mb-5">Sign in</h3>
 
-              <div data-mdb-input-init class="form-outline mb-4">
-                <input type="email" id="email" class="form-control form-control-lg" name="email"/>
-                <label class="form-label" for="email">Email</label>
+                <div class="col-auto mt-3">
+                  <span id="uniname" class="form-text color-red"></span>
+                </div>
+                <div data-mdb-input-init class="form-outline mb-3">
+                  <input type="text" id="uname" class="form-control form-control-lg" name="uniquename"/>
+                  <label class="form-label" for="uname" id="uniquename">Username or Email</label>
+                </div>
+
+                <div class="col-auto mt-3">
+                  <span id="aadharnum" class="form-text color-red"></span>
+                </div>
+                <div data-mdb-input-init class="form-outline mb-3">
+                  <input type="number" id="aadharno" class="form-control form-control-lg" name="aadharnumber"/>
+                  <label class="form-label" for="aadharno" id="aadharnumber">Aadhar number</label>
+                </div>
+
+                <div class="col-auto mt-3">
+                  <span id="pass" class="form-text color-red"></span>
+                </div>
+                <div data-mdb-input-init class="form-outline mb-3">
+                  <div class="input-group">
+                    <div data-mdb-input-init class="form-outline">
+                      <input type="password" id="pwd" class="form-control" aria-label="Password" name="password"/>
+                      <label class="form-label" for="pwd" id="password">Password</label>
+                    </div>
+                    <button class="btn btn-outline-primary eyeBtn" type="button" id="password-toggle">
+                        <i class="far fa-eye" id="toggle-icon-pass"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Checkbox -->
+                <div class="form-check d-flex justify-content-start mb-4">
+                  <input class="form-check-input" type="checkbox"  id="rm"  name="rememberpass"/>
+                  <label class="form-check-label" for="rm" id="rememberpass"> Remember password </label>
+                </div>
+
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.umd.min.js"></script>
+
+                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" id="loginBtn" type="submit">Login</button>
+
               </div>
-
-              <div data-mdb-input-init class="form-outline mb-4">
-                <input type="password" id="password" class="form-control form-control-lg" name="password" />
-                <label class="form-label" for="password">Password</label>
-              </div>
-
-              <!-- Checkbox -->
-              <div class="form-check d-flex justify-content-start mb-4">
-                <input class="form-check-input" type="checkbox"  id="rememberme"  name="rememberme"/>
-                <label class="form-check-label" for="rememberme"> Remember password </label>
-              </div>
-
-              <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.umd.min.js"></script>
-
-              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
   </body>
 </html>

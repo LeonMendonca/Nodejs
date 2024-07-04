@@ -1,7 +1,10 @@
 import Joi from 'joi';
+import { compare } from 'bcrypt'
 
-import { DtoRequest } from '../dto/dtoRequest.js';
+import { DtoRequestSignup, DtoRequestLogin } from '../dto/dtoRequest.js';
 import { Dao } from './dao.js';
+import { createSession, checkSessionId } from '../session.js';
+import { DtoResponse, DtoResponseProfile } from '../dto/dtoResponse.js';
 
 //custom date function
 const date = Joi.string().custom((value,error) => {
@@ -33,11 +36,17 @@ const joiSchema = Joi.object({
   zipcode: Joi.string().length(6).required()
 })
 
+const joiSchemaLogin = Joi.object({
+  uniquename : Joi.string().required(),
+  aadharnumber : Joi.string().length(12).required(),
+  password : Joi.string().required(),
+  rememberpass : Joi.string().valid('true','false').required(),
+})
+
 class Service {
   static async serviceCreateUser(body) {
     try {
-      console.log('service create user',body);
-      const dtoRequest = new DtoRequest(body);
+      const dtoRequest = new DtoRequestSignup(body);
       const { error } = joiSchema.validate(dtoRequest);
       if(error) {
         throw error;
@@ -56,6 +65,65 @@ class Service {
       } else {
         throw error;
       };
+    }
+  }
+
+  static async serviceAuthCheck(sessionid,body) {
+    try {
+      const dtoRequest = new DtoRequestLogin(body);
+      const { error } = joiSchemaLogin.validate(dtoRequest);
+      if(error) {
+        throw new Error(JSON.stringify({joi:error.message}));
+      }
+      //check whether email or username
+      let colname = null;
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const isEmail = regex.test(dtoRequest.uniquename);
+      if(isEmail) { 
+        colname = 'email';
+      } else {
+        colname = 'username';
+      }
+      const [result] = await Dao.authUser(colname,dtoRequest.uniquename)
+
+      if(!result) {
+        throw new Error(JSON.stringify({uniquename:false}));
+      }
+      if(dtoRequest.aadharnumber != result.aadharnumber) {
+        throw new Error(JSON.stringify({aadharnumber:false}));
+      }
+      const isPassValid = await compare(dtoRequest.password,result.password)
+      if(!isPassValid) {
+        throw new Error(JSON.stringify({password:false}));
+      }
+      
+      //if validate user login details, then proceed
+      const loggedInUser = new DtoResponse(result);
+      console.log("session data",loggedInUser,result);
+      if(dtoRequest.rememberpass === 'true' ) {
+        console.log("password saved");
+      } else {
+        console.log("not saved");
+      }
+      const sid = createSession(sessionid,loggedInUser);
+      return { loggedInUser, sid };
+    } catch(error) {
+      throw error;
+    }
+  }
+
+  static async serviceGetProfile(sessionid) {
+    try {
+      const loggedInUser = checkSessionId(sessionid);
+      console.log(loggedInUser);
+      if(!loggedInUser) {
+        throw new Error(JSON.stringify({sessionid:'undefined'}));
+      }
+      const [result] = await Dao.getUser(loggedInUser.id);
+      const profileData = new DtoResponseProfile(result);
+      return profileData;
+    } catch(error) {
+      throw error;
     }
   }
 }

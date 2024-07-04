@@ -23,11 +23,19 @@ const body = {
   number:9328,
 }
 
+const body2 = {
+  uniquename: 'leon@gmail.com',
+  aadharnumber: '983948938128',
+  password: "leon2003",
+  rememberme: 'true'
+}
 
-const res = await fetch(`${serverUrl}/signup`,{
+
+
+const res = await fetch(`${serverUrl}/login`,{
   method:'POST',
   headers:{'Content-type':'application/json'},
-  body:JSON.stringify(body),
+  body:JSON.stringify(body2),
 })
 const response = await res.text();
 console.log(JSON.parse(response));
