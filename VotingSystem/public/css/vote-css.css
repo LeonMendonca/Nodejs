@@ -1,0 +1,32 @@
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.flex-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  flex: 1;
+  margin-right: 10px;
+}
+.flex-item:last-child {
+  margin-right: 0;
+}
+.text-left {
+  margin-right: auto;
+}
+.text-right {
+  display: flex;
+  align-items: center;
+}
+.text-right p {
+  margin-right: 10px;
+}
+.flex-item img {
+  max-width: 50px;
+  border-radius: 5px;
+}

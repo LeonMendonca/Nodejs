@@ -9,6 +9,9 @@ reqHandler.post('/signup',Controllers.CreateUser)
 
 reqHandler.post('/login',Controllers.AuthUser);
 
-reqHandler.post('/profile',protector,Controllers.GetProfile);
+//sends sessionid
+reqHandler.get('/userprofile',protector,Controllers.GetProfile);
+
+reqHandler.get('/candidates',Controllers.GetCandidates);
 
 export { reqHandler }

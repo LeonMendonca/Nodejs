@@ -126,16 +126,15 @@ class Service {
       throw error;
     }
   }
+
+  static async serviceGetCandidates() {
+    try {
+      const result = await Dao.getCandidate();
+      return result;
+    } catch(error) {
+      throw error;
+    }
+  }
 }
-/*
-async function(req,res) {
-  try {
-    const regDetail = req.body;
-    await createUser(regDetail);
-    res.json({uniqueName:true, uniqueEmail:true});
-  } catch(error) {
-      }
-}
-*/
 
 export { Service };

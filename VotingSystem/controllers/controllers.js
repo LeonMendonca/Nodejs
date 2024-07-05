@@ -22,8 +22,19 @@ class Controllers {
 
   static async GetProfile(req,res) {
     try {
-      const userProfileData = await Service.serviceGetProfile(req.body?.sid);
+      const authHeader = req.headers?.authentication;
+      const sessionId = authHeader.split(' ')[1];
+      const userProfileData = await Service.serviceGetProfile(sessionId);
       res.json({status:userProfileData});
+    } catch(error) {
+      res.json({error:error.message});
+    }
+  }
+
+  static async GetCandidates(req,res) {
+    try {
+      const candidates = await Service.serviceGetCandidates();
+      res.json({status:candidates});
     } catch(error) {
       res.json({error:error.message});
     }

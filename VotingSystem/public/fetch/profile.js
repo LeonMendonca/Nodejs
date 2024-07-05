@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded',async (event) => {
   ];
   event.preventDefault();
   const sessionid = sessionStorage.getItem('sid');
-  const res = await fetch(`${url}/profile`,{
-    method:'POST',
-    headers:{'Content-type':'application/json','Authentication':`Bearer ${sessionid}`},
-    body:JSON.stringify({'sid':sessionid})
+  const res = await fetch(`${url}/userprofile`,{
+    method:'GET',
+    headers:{'Authentication':`Bearer ${sessionid}`}
   });
   const response = await res.json();
   console.log(response.status);
+
   if(response.status) {
     const ProfileObject = response.status;
     for(let id of arrOfIds) {
@@ -24,8 +24,7 @@ document.addEventListener('DOMContentLoaded',async (event) => {
           break;
         }
       }
-    }
-    
+    } 
   }
 
   let error = null;

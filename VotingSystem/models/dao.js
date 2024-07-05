@@ -35,6 +35,15 @@ class Dao {
     } catch(error) {
     }
   }
+
+  static async getCandidate() {
+    try {
+      const result = await pool.execute(`SELECT * FROM candidates`);
+      return result[0];
+    } catch(error) {
+      throw error;
+    }
+  }
 }
 
 export { Dao };

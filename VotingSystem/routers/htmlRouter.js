@@ -19,11 +19,11 @@ html.get('/signup',function(req,res){
   res.sendFile( join(absPath,'signup.html') );
 })
 
-html.get('/profile',function(req,res) {
+html.get('/profile',protector,function(req,res) {
   res.sendFile( join(absPath,'profile.html') );
 })
 
-html.get('/vote',protector,function(req,res) {
+html.get('/vote',function(req,res) {
   res.sendFile( join(absPath,'vote.html') );
 })
 

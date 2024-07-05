@@ -1,4 +1,4 @@
-const serverUrl = 'http://localhost:3000'
+onst serverUrl = 'http://localhost:3000'
 
 const body = {
   aadharnumber: '983948938128',
